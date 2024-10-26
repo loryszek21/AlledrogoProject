@@ -3,15 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ffffff; /* Light mode background */
+  --foreground: #171717; /* Dark mode foreground */
+  --secondary-light: #ff6347; /* Example secondary color for light mode (red) */
+  --secondary-dark: #8b0000; /* Example secondary color for dark mode (dark red) */
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: system) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+} */
+[data-theme="light"] {
+  --background: #ffffff; /* Light mode background */
+  --foreground: #171717; /* Light mode text */
+  --secondary: var(--secondary-light); /* Use light mode secondary color */
+}
+
+[data-theme="dark"] {
+  --background: #171717; /* Dark mode background */
+  --foreground: #ffffff; /* Dark mode text */
+  --secondary: var(--secondary-dark); /* Use dark mode secondary color */
 }
 
 body {
