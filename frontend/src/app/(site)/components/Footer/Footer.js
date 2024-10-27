@@ -3,7 +3,7 @@
 function Footer() {
   return (
     <>
-      <div className="dark:bg-dark mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 dark:text-white">
+      <div className="dark:bg-dark mx-auto max-w-full px-6 py-24 sm:py-32 lg:px-8 dark:text-white">
         <div>
           <form action="">
             <div class="gird-cols-1 grid items-center justify-center gap-4 md:grid-cols-3">
@@ -31,7 +31,7 @@ function Footer() {
               <div class="mb-6 md:me-auto">
                 <button
                   type="submit"
-                  class="inline-block rounded px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
+                  class="inline-block rounded px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1  bg-button text-white"
                   data-twe-ripple-init
                   data-twe-ripple-color="light"
                 >
