@@ -14,8 +14,8 @@ const ProductGrid = ({ products }) => {
             <Image
               src={product.image}
               alt={product.name}
-              layout="fill"
-              objectFit="cover"
+              fill={true}
+              // objectFit="cover"
               className="rounded-md"
             />
           </div>
