@@ -1,21 +1,25 @@
+// ThemeToggle.js
 "use client";
 import { useEffect, useState } from "react";
-import { BsFillSunFill, BsFillMoonFill, BsSunFill } from "react-icons/bs";
+import { BsFillSunFill, BsSunFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
+import Cookies from "js-cookie";
 
 const ThemeToggle = () => {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+
   useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    if (theme === "dark") setDarkMode(true);
+    const storedTheme = Cookies.get("theme");
+    if (storedTheme === "dark") setDarkMode(true);
   }, []);
+
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+      Cookies.set("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+      Cookies.set("theme", "light");
     }
   }, [darkMode]);
 
