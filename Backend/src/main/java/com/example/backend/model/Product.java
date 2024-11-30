@@ -9,7 +9,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long product_id;
+    private long product_id;
     @Column(name = "name")
     private String product_name;
     @Column(name = "description")

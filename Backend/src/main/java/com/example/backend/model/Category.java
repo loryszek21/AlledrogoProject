@@ -9,7 +9,7 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int category_id;
+    private long category_id;
 
 
         @Column(length = 50 , name = "name")
@@ -24,7 +24,7 @@ public class Category {
     @OneToMany(mappedBy = "parentCategory", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Category> subcategories;
 
-    public int getId() {
+    public long getId() {
         return category_id;
     }
 

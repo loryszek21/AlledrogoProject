@@ -8,13 +8,13 @@ public class VatRate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vat_rate_id")
-    private int idVat;
+    private long idVat;
     @Column(name = "rate_name")
     String rateName;
     @Column(name = "rate_value")
     Double rateValue;
 
-    public int getIdVat() {
+    public long getIdVat() {
         return idVat;
     }
 
