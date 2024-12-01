@@ -18,7 +18,7 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    VatRates (
+    Vat_Rates (
         vat_rate_id SERIAL PRIMARY KEY,
         rate_name VARCHAR(50) NOT NULL,
         rate_value NUMERIC(5, 2) NOT NULL
@@ -32,7 +32,7 @@ CREATE TABLE
         price NUMERIC(10, 2),
         category INTEGER,
         vat_rate INTEGER,
-        FOREIGN KEY (vat_rate) REFERENCES VatRates (vat_rate_id),
+        FOREIGN KEY (vat_rate) REFERENCES Vat_Rates (vat_rate_id),
         FOREIGN KEY (category) REFERENCES Categories (category_id)
     );
 

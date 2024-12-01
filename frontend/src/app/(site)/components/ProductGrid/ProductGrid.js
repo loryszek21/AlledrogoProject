@@ -4,16 +4,18 @@ import Image from "next/image";
 
 const ProductGrid = ({ products }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
       {products.map((product) => (
         <div
           key={product.id}
-          className="dark:bg-neutral-800 rounded-lg shadow p-4"
+          className="dark:bg-neutral-800 rounded-lg shadow p-4 "
         >
-          <div className="relative h-40 w-full">
+          <div className="relative  w-full h-40 sm:h-52 md:h-60 lg:h-72">
             <Image
               src={product.image}
               alt={product.name}
+              // fill
+              
               fill={true}
               // objectFit="cover"
               className="rounded-md"
