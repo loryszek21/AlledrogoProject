@@ -9,17 +9,17 @@ const ThemeToggle = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    const storedTheme = Cookies.get("theme");
-    if (storedTheme === "dark") setDarkMode(true);
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") setDarkMode(true);
   }, []);
 
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
-      Cookies.set("theme", "dark");
+      localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
-      Cookies.set("theme", "light");
+      localStorage.setItem("theme", "light");
     }
   }, [darkMode]);
 
