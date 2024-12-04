@@ -1,59 +1,25 @@
+"use client";
 import Header from "@/app/(site)/components/Header/Header";
 import Footer from "@/app/(site)/components/Footer/Footer";
 import ThemeToggle from "@/app/(site)/components/ThemeToggle/ThemeToggle";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
-function Home() {
-  const products = [
-    {
-      id: 1,
-      name: "Product 1",
-      price: "$10.00",
-      image: "/product1.jpg",
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      price: "$15.00",
-      image: "/product2.jpg",
-    },
-    {
-      id: 3,
-      name: "Product 1",
-      price: "$10.00",
-      image: "/product1.jpg",
-    },
-    {
-      id: 4,
-      name: "Product 2",
-      price: "$15.00",
-      image: "/product2.jpg",
-    },
-    {
-      id: 5,
-      name: "Product 1",
-      price: "$10.00",
-      image: "/product1.jpg",
-    },
-    {
-      id: 6,
-      name: "Product 2",
-      price: "$15.00",
-      image: "/product2.jpg",
-    },
-    {
-      id: 7,
-      name: "Product 1",
-      price: "$10.00",
-      image: "/product1.jpg",
-    },
-    {
-      id: 8,
-      name: "Product 2",
-      price: "$15.00",
-      image: "/product2.jpg",
-    },
-    // More products here
-  ];
+import { useEffect, useState } from "react";
+function Home(){
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/products");
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    fetchProducts();
+  }, []);
+    
   return (
     <>
       <Header />
