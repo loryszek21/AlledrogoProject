@@ -1,5 +1,8 @@
 /frontend/node_modules
 
 .idea
-.vscode
+.vscode/
+node_modules
 
+
+frontend/src/app/.env

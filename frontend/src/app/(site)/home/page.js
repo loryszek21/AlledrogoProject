@@ -4,8 +4,26 @@ import Footer from "@/app/(site)/components/Footer/Footer";
 import ThemeToggle from "@/app/(site)/components/ThemeToggle/ThemeToggle";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
 import { useEffect, useState } from "react";
+import { verifyToken } from "../services/auth";
 function Home(){
   const [products, setProducts] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  useEffect(() => {
+    const checkAuth = async () => {
+      const valid = await verifyToken();
+      if (!valid) {
+        window.location.href = "/login";
+      } else {
+        setIsAuthenticated(true);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  if (!isAuthenticated) {
+    return <div>Loading...</div>;
+  }
 
   useEffect(() => {
     const fetchProducts = async () => {
