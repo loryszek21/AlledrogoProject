@@ -6,3 +6,4 @@ node_modules
 
 
 frontend/src/app/.env
+Backend/src/main/java/com/example/backend/.env
