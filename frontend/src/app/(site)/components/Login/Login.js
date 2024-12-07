@@ -1,4 +1,5 @@
 "use client";
+import Cookies from "js-cookie";
 
 import AuthForm from "../AuthForm/AuthForm";
 import { useState } from "react";
@@ -6,11 +7,14 @@ import { login } from "../../services/auth";
 function Login() {
   const [error, setError] = useState("");
 
-  
- const handleLogin = async (formData) => {
+  const handleLogin = async (formData) => {
     try {
       const token = await login(formData.username, formData.password);
       console.log("Zalogowano:", token);
+
+      // Zapisywanie tokenu w cookies
+      Cookies.set("token", token, { expires: 7, path: "/" });
+
       // Przekierowanie użytkownika po zalogowaniu
       window.location.href = "/home";
     } catch (err) {
@@ -24,7 +28,7 @@ function Login() {
       title="Sign in"
       buttonText="Sign in"
       onSubmit={handleLogin}
-      fields={["username", "password"]} 
+      fields={["username", "password"]}
     />
   );
 }
