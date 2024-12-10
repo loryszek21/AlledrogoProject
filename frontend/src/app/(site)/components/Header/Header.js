@@ -121,7 +121,7 @@ export default function Example() {
           <div className="flex items-center gap-x-4">
 
           <ThemeToggle />
-          <a href="#" className="text-sm font-semibold leading-6 dark:text-white">
+          <a href="/login" className="text-sm font-semibold leading-6 dark:text-white">
             Log in <span aria-hidden="true">&rarr;</span>
           </a>
           </div>

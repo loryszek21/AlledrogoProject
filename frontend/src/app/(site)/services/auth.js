@@ -10,7 +10,7 @@ export const login = async (username, password) => {
   return token;
 };
 
-export const regster = async (username, email, password) => {
+export const register  = async (username, email, password) => {
   return await axios.post(API_URL + "register", { username, email, password });
 };
 export const verifyToken = async () => {

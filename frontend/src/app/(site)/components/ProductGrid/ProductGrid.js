@@ -1,11 +1,17 @@
 // components/ProductGrid.js
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 // import { IoAddSharp } from "react-icons/io5";
 const ProductGrid = ({ products }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
       {products.map((product) => (
+           <Link
+           key={product.product_id}
+           href={`/products/${product.product_id}`} // Dynamiczny link do strony produktu
+           passHref
+         >
         <div
           key={product.product_id}
           className="dark:bg-neutral-800 rounded-lg shadow p-4 "
@@ -27,6 +33,7 @@ const ProductGrid = ({ products }) => {
             Add to Cart
           </button>
         </div>
+        </Link>
       ))}
     </div>
   );
