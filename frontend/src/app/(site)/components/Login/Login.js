@@ -14,6 +14,8 @@ function Login() {
 
       // Zapisywanie tokenu w cookies
       Cookies.set("token", token, { expires: 7, path: "/" });
+      Cookies.set("username", formData.username, { expires: 7, path: "/" });
+
 
       // Przekierowanie użytkownika po zalogowaniu
       window.location.href = "/home";

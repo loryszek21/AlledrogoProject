@@ -1,0 +1,22 @@
+INSERT INTO reviews (product_id, user_id, rating, comment, review_date)
+VALUES
+    (1, 1, 5, 'Świetny produkt! Bardzo polecam.', CURRENT_TIMESTAMP),
+    (1, 2, 4, 'Dobry produkt, ale mógłby być trochę tańszy.', CURRENT_TIMESTAMP),
+    (1, 3, 3, 'Produkt średni, spodziewałem się czegoś lepszego.', CURRENT_TIMESTAMP),
+    (1, 1, 5, 'Rewelacja! Kupiłbym ponownie.', CURRENT_TIMESTAMP),
+    (2, 1, 4, 'Jakość produktu bardzo dobra.', CURRENT_TIMESTAMP),
+    (2, 2, 3, 'Trochę za drogi jak na to, co oferuje.', CURRENT_TIMESTAMP),
+    (2, 2, 2, 'Produkt nie spełnia moich oczekiwań.', CURRENT_TIMESTAMP),
+    (2, 3, 5, 'Super, wszystko zgodne z opisem.', CURRENT_TIMESTAMP),
+    (3, 2, 5, 'Najlepszy produkt w swojej kategorii.', CURRENT_TIMESTAMP),
+    (3, 3, 4, 'Nie najgorszy, ale nie idealny.', CURRENT_TIMESTAMP),
+    (3, 1, 5, 'Zdecydowanie warto kupić.', CURRENT_TIMESTAMP),
+    (3, 2, 3, 'Oceniam produkt na 3, nie jest źle.', CURRENT_TIMESTAMP),
+    (4, 1, 5, 'Produkt świetny, wart swojej ceny.', CURRENT_TIMESTAMP),
+    (4, 3, 4, 'Bardzo dobry, ale ma kilka drobnych wad.', CURRENT_TIMESTAMP),
+    (4, 1, 2, 'Nie spełnił moich oczekiwań.', CURRENT_TIMESTAMP),
+    (4, 2, 5, 'Polecam każdemu, produkt jest doskonały.', CURRENT_TIMESTAMP),
+    (5, 1, 3, 'Średnio, myślałem, że będzie lepszy.', CURRENT_TIMESTAMP),
+    (5, 3, 5, 'Naprawdę świetny produkt.', CURRENT_TIMESTAMP),
+    (5, 2, 4, 'Dobry produkt, ale mógłby być tańszy.', CURRENT_TIMESTAMP),
+    (5, 1, 5, 'Nie ma co się zastanawiać, warto kupić.', CURRENT_TIMESTAMP);

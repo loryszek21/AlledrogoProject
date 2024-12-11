@@ -5,12 +5,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Header from "@/app/(site)/components/Header/Header"; // Correct default import
 import CommentSection from "../../components/CommentSection/CommentSection";
+import { FaStar } from "react-icons/fa";
 
 
 export default function ProductPage({ params }) {
   const { id } = params;
   const [product, setProduct] = useState(null);
   const [image, setImage] = useState(1);
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     if (id) {
@@ -20,6 +22,19 @@ export default function ProductPage({ params }) {
         .catch((error) => console.error("Błąd podczas ładowania produktu:", error));
         
     }
+  }, [id]);
+
+  useEffect(() => {
+    const fetchAvarageReview = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/review/avarage/${id}`);
+        setRating(response.data); // Set the fetched comments to the state
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
+    };
+
+    fetchAvarageReview();
   }, [id]);
 
   if (!product) {
@@ -70,6 +85,9 @@ export default function ProductPage({ params }) {
       {product.product_name}
       {/* Lorem ipsum dolor, sit amet consectetur, adipisicing elit. */}
     </h2>
+    <p className="text-sm inline-flex items-center"> Średnia ocen <span>&nbsp;</span>
+  {rating} <FaStar className="ml-1 text-yellow-400" />
+</p>
     <p className="text-gray-500 text-sm">
     By <a href="#" className="text-accentText hover:underline">ABC Company</a>
     </p>
@@ -99,7 +117,7 @@ export default function ProductPage({ params }) {
 </div>
 </div>
 
-<CommentSection />
+<CommentSection productId={id} />
     </>
     )
 }

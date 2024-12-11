@@ -9,6 +9,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -31,7 +33,7 @@ public class UserServiceTest {
         User user = new User();
         user.setUsername("testuser");
         user.setPassword("$2a$10$encryptedpassword");
-        when(userRepository.findByUsername("testuser")).thenReturn(user);
+        when(userRepository.findByUsername("testuser")).thenReturn(Optional.of(user));
         when(passwordEncoder.matches("password", user.getPassword())).thenReturn(true);
 
         boolean result = userService.authenticate("testuser", "password");

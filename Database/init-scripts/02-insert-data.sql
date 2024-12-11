@@ -1,4 +1,6 @@
-INSERT INTO Users(username, password, first_name, last_name, email) VALUES ('User1', 'admin', 'UserName', 'UserLastName', 'user@email.com' );
+INSERT INTO Users(username, password, first_name, last_name, email) VALUES ('User1', 'admin', 'UserName', 'UserLastName', 'user@email.com' ),
+('Lorych', '$2a$10$Mf60wT048ag/Qf88z9mx3eQliw3NYeHr6VDTLmamaIQNjXw4.fex2', 'Dawid', 'Lorych', 'dawidlorych21@gmailcom'); 
+('Mucha', '$2a$10$gcIrEry65kdtTw.Fp3gzDOnyLWr7tIgMDybIX4hceYuExlharbEm2', 'Michał', 'Mucha', 'MuchaMichal@gmail.com'); 
 
 INSERT INTO Vat_Rates (rate_name, rate_value)
 VALUES ('Standard', 23.00);

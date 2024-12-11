@@ -1,40 +1,52 @@
-import { useState } from "react";
-
-const CommentSection = () => {
-  const [comments, setComments] = useState([
-    {
-      id: 1,
-      user: "John Doe",
-      rating: 4,
-      text: "Great product! Highly recommend it.",
-      date: "2024-12-10",
-    },
-    {
-      id: 2,
-      user: "Jane Smith",
-      rating: 5,
-      text: "Absolutely fantastic! Worth every penny.",
-      date: "2024-12-08",
-    },
-  ]);
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+const CommentSection = ({ productId }) => {
+  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [rating, setRating] = useState(5);
+  const [username, setUsername] = useState("");
 
-  const handleAddComment = () => {
-    if (!newComment.trim()) return;
-
-    const newEntry = {
-      id: comments.length + 1,
-      user: "Guest User", // In real apps, this will come from authentication
-      rating,
-      text: newComment,
-      date: new Date().toISOString().split("T")[0],
+  // Fetch reviews from the backend using axios
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/review/${productId}`);
+        setComments(response.data); // Set the fetched comments to the state
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
     };
 
-    setComments([newEntry, ...comments]);
-    setNewComment("");
-    setRating(5);
+    fetchReviews();
+  }, [productId]); // Run this effect only when productId changes
+  useEffect(() => {
+    const storedUsername = Cookies.get("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
+ // Run this effect only when productId changes
+
+  // Handle adding a new comment
+  const handleAddComment = async () => {
+    if (!newComment.trim()) return;
+  
+    const newEntry = {
+      author: username, 
+      rating,
+      description: newComment,
+    };
+  
+    try {
+      const response = await axios.post(`http://localhost:8080/review/${productId}`, newEntry);
+      setComments([response.data, ...comments]); // Dodaj nowy komentarz do listy
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    } finally {
+      setNewComment("");
+      setRating(5);
+    }
   };
 
   return (
@@ -80,8 +92,8 @@ const CommentSection = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-sm font-semibold">{comment.user}</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{comment.date}</p>
+                <h3 className="text-sm font-semibold">{comment.author}</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{comment.reviewDate}</p>
               </div>
               <div className="flex space-x-1">
                 {[...Array(5)].map((_, i) => (
@@ -94,7 +106,7 @@ const CommentSection = () => {
                 ))}
               </div>
             </div>
-            <p className="mt-2 text-sm">{comment.text}</p>
+            <p className="mt-2 text-sm">{comment.description}</p>
           </div>
         ))}
       </div>
