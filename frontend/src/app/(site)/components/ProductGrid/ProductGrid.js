@@ -27,13 +27,13 @@ const ProductGrid = ({ products }) => {
             <div className="relative  w-full h-40 sm:h-52 md:h-60 lg:h-72">
               <Image
                 src={product.image}
-                alt={product.product_name}
+                alt={product.productName}
                 fill={true}
                 className="rounded-md"
               />
             </div>
             <h3 className="mt-4 text-lg font-semibold dark:text-white">
-              {product.product_name}
+              {product.productName}
             </h3>
             <p className="dark:text-white">
               ${product.product_price.toFixed(2)}

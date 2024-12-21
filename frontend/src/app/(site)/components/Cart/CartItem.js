@@ -41,7 +41,7 @@ function CartItem({ item }) {
         <div className="flex divide-x border w-max rounded-lg overflow-hidden">
           <button
             onClick={handleDecrement}
-            className="flex items-center justify-center bg-gray-100 dark:bg-dark text-dark w-10 h-10 font-semibold"
+            className="flex items-center justify-center  bg-gray-100 dark:bg-dark dark:text-white text-dark w-10 h-10 font-semibold"
           >
             -
           </button>

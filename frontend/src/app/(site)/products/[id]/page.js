@@ -87,7 +87,7 @@ export default function ProductPage({ params }) {
             {/* Right Section */}
             <div className="md:flex-1 px-4">
               <h2 className="mb-2 leading-tight tracking-tight font-bold text-gray-800 dark:text-white text-2xl md:text-3xl">
-                {product.product_name}
+                {product.productName}
                 {/* Lorem ipsum dolor, sit amet consectetur, adipisicing elit. */}
               </h2>
               <p className="text-sm inline-flex items-center">
