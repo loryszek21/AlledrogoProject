@@ -1,27 +1,23 @@
-"use client";
-import Cookies from "js-cookie";
-
-import AuthForm from "../AuthForm/AuthForm";
-import { useState } from "react";
-import { login } from "../../services/auth";
+'use client';
+import { useState } from 'react';
+import { useUser } from './UserProvider';
+import { login } from '../../services/auth';
+import AuthForm from '../AuthForm/AuthForm';
 function Login() {
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
+  const { loginUser } = useUser();
 
   const handleLogin = async (formData) => {
     try {
       const token = await login(formData.username, formData.password);
-      console.log("Zalogowano:", token);
-
-      // Zapisywanie tokenu w cookies
+      console.log('Zalogowano:', token);
       Cookies.set("token", token, { expires: 7, path: "/" });
-      Cookies.set("username", formData.username, { expires: 7, path: "/" });
-
-
-      // Przekierowanie użytkownika po zalogowaniu
-      window.location.href = "/home";
+      // Cookies.set("username", formData.username, { expires: 7, path: "/" });
+      loginUser(formData.username); // Zapisujemy nazwę użytkownika w kontekście
+      window.location.href = '/home';
     } catch (err) {
-      console.error("Błąd logowania:", err);
-      setError("Niepoprawne dane logowania.");
+      console.error('Błąd logowania:', err);
+      setError('Niepoprawne dane logowania.');
     }
   };
 
@@ -30,7 +26,7 @@ function Login() {
       title="Sign in"
       buttonText="Sign in"
       onSubmit={handleLogin}
-      fields={["username", "password"]}
+      fields={['username', 'password']}
     />
   );
 }

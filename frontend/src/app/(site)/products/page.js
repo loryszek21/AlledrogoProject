@@ -5,6 +5,7 @@ import ThemeToggle from "@/app/(site)/components/ThemeToggle/ThemeToggle";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
 import { useEffect, useState } from "react";
 import { verifyToken } from "../services/auth";
+
 function Products() {
   const [products, setProducts] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);

@@ -1,13 +1,17 @@
 package com.example.backend.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "cartitems")
-public class Cartitem {
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('cartitems_cart_item_id_seq'")
@@ -29,45 +33,5 @@ public class Cartitem {
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "date_added")
     private Instant dateAdded;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public Instant getDateAdded() {
-        return dateAdded;
-    }
-
-    public void setDateAdded(Instant dateAdded) {
-        this.dateAdded = dateAdded;
-    }
 
 }
