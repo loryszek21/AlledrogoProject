@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useUser } from './UserProvider';
 import { login } from '../../services/auth';
 import AuthForm from '../AuthForm/AuthForm';
+import Cookies from 'js-cookie';
 function Login() {
   const [error, setError] = useState('');
   const { loginUser } = useUser();
