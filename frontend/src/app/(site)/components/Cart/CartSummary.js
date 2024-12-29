@@ -11,8 +11,7 @@ function CartSummary() {
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shipping = 4.00;
   const tax = subtotal * 0.23; // np. 23% podatku
-  const total = subtotal + shipping + tax;
-
+  const total = (subtotal + shipping + tax).toFixed(2);
 
   const handlePayment = async () => {
     console.log('Cart Items:', cartItems);
@@ -22,13 +21,16 @@ function CartSummary() {
         amount: total,
         currency: 'PLN',
         description: 'Order payment',
-        cartItems: cartItems,
+        cartDTO: cartItems,
         userName: user.username
 
         
       });
 
       console.log('Payment Response:', paymentResponse.data);
+      const redirectUrl = paymentResponse.data;
+      window.location.href = redirectUrl;
+
       // Handle successful payment response
     } catch (error) {
       console.error('Payment Error:', error);
@@ -42,7 +44,7 @@ function CartSummary() {
         <li className="flex flex-wrap gap-4 text-base py-3">Subtotal <span className="ml-auto font-bold">${subtotal.toFixed(2)}</span></li>
         <li className="flex flex-wrap gap-4 text-base py-3">Shipping <span className="ml-auto font-bold">${shipping.toFixed(2)}</span></li>
         <li className="flex flex-wrap gap-4 text-base py-3">Tax <span className="ml-auto font-bold">${tax.toFixed(2)}</span></li>
-        <li className="flex flex-wrap gap-4 text-base py-3 font-bold">Total <span className="ml-auto">${total.toFixed(2)}</span></li>
+        <li className="flex flex-wrap gap-4 text-base py-3 font-bold">Total <span className="ml-auto">${total}</span></li>
       </ul>
       <button 
       onClick={handlePayment}

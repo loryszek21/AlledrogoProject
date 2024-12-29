@@ -1,8 +1,13 @@
 package com.example.backend.controller;
 
 import com.example.backend.service.PayUAuthService;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RestController
 public class PayUController {
@@ -19,6 +24,13 @@ public class PayUController {
     }
 
 
+    @PostMapping("/payu/order")
+    public String createOrder() {
+//        String bearerToken = token.replace("Bearer ", "");
 
+//        return payUAuthService.createOrder();
+        return "OK";
+//    }
 
+}
 }
