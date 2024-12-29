@@ -65,7 +65,7 @@ export default function Example() {
           </button>
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-          <Popover className="relative">
+          {/* <Popover className="relative">
             <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 dark:text-white">
               Product
               <ChevronDownIcon aria-hidden="true" className="h-5 w-5 flex-none text-gray-400" />
@@ -107,16 +107,18 @@ export default function Example() {
                 ))}
               </div>
             </PopoverPanel>
-          </Popover>
-
-          <a href="#" className="text-sm font-semibold leading-6 dark:text-white">
-            Features
+          </Popover> */}
+          <a href="/home" className="text-sm font-semibold leading-6 dark:text-white">
+            Home
           </a>
-          <a href="#" className="text-sm font-semibold leading-6 dark:text-white">
-            Marketplace
+          <a href="/products" className="text-sm font-semibold leading-6 dark:text-white">
+            Products
           </a>
-          <a href="#" className="text-sm font-semibold leading-6 dark:text-white">
-            Company
+          <a href="/orders" className="text-sm font-semibold leading-6 dark:text-white">
+            My orders
+          </a>
+          <a href="/add" className="text-sm font-semibold leading-6 dark:text-white">
+            Add New Listing
           </a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -140,7 +142,7 @@ export default function Example() {
           <div className="flex items-center justify-between">
           <ThemeToggle />
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Your asdasdasd</span>
               <img
                 alt=""
                 src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
@@ -160,7 +162,7 @@ export default function Example() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <Disclosure as="div" className="-mx-3">
+                {/* <Disclosure as="div" className="-mx-3">
                   <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 dark:bg-dark dark:text-white dark:hover:bg-medium text-gray-900 hover:bg-gray-50">
                     Product
                     <ChevronDownIcon aria-hidden="true" className="h-5 w-5 flex-none group-data-[open]:rotate-180" />
@@ -177,24 +179,30 @@ export default function Example() {
                       </DisclosureButton>
                     ))}
                   </DisclosurePanel>
-                </Disclosure>
+                </Disclosure> */}
                 <a
-                  href="#"
+                  href="/home"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 dark:bg-dark dark:text-white dark:hover:bg-medium text-gray-900 hover:bg-gray-50"
                 >
-                  Features
+                  Home
                 </a>
                 <a
-                  href="#"
+                  href="/products"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 dark:bg-dark dark:text-white dark:hover:bg-medium text-gray-900 hover:bg-gray-50"
                 >
-                  Marketplace
+                  Products
                 </a>
                 <a
-                  href="#"
+                  href="/orders"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 dark:bg-dark dark:text-white dark:hover:bg-medium text-gray-900 hover:bg-gray-50"
+                >
+                  My orders
+                </a>
+                <a
+                  href="/add"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 dark:bg-dark dark:text-white dark:hover:bg-medium  text-gray-900 hover:bg-gray-50"
                 >
-                  Company
+                  Add New Listing
                 </a>
               </div>
               <div className="py-6">
