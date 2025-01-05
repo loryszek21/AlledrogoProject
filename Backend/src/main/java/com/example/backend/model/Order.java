@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,4 +31,7 @@ public class Order {
     @Column(name = "order_status", length = 50)
     private String orderStatus;
 
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrderItem> orderItems;
 }

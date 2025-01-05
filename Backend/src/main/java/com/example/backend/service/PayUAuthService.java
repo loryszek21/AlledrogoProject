@@ -18,6 +18,7 @@ import java.util.Map;
 public class PayUAuthService {
     private static final Logger logger = LoggerFactory.getLogger(PayUAuthService.class);
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private OrderService orderService;
 
     @Value("${payu.oauth.url}")
     private String oauthUrl;
@@ -30,6 +31,11 @@ public class PayUAuthService {
 
     @Value("${payu.order.url}")
     private String orderUrl;
+
+
+    public PayUAuthService(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     public String authenticate() {
         RestTemplate restTemplate = new RestTemplate();
@@ -116,6 +122,7 @@ public class PayUAuthService {
                     logger.error("Error deserializing response body", e);
                     throw new RuntimeException("Error parsing response JSON", e);
                 }
+                orderService.saveOrder(orderPayment);
 
                 return (String) body.get("redirectUri");
             } else if (response.getStatusCode() == HttpStatus.UNAUTHORIZED) {

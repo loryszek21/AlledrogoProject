@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -50,6 +52,33 @@ private final OrderItemRepository orderItemRepository;
 
         }
         cartItemRepository.deleteAllByUserId(Long.valueOf(user.getId()));
+
+    }
+
+    public List<OrderPayment> getOrdersPayment(String userName) {
+        User user = userRepository.findByUsername(userName).orElseThrow(()-> new RuntimeException("User not found"));
+
+//        OrderPayment orderPayment = new OrderPayment();
+List<Order> orders = orderRepository.findByUserId(user.getId());
+
+return orders.stream().map(order -> {
+    OrderPayment orderPayment = new OrderPayment();
+    orderPayment.setUserName(user.getUsername());
+    orderPayment.setOrderDate(order.getOrderDate());
+    orderPayment.setOrderStatus(order.getOrderStatus());
+    orderPayment.setCartDTO(
+            order.getOrderItems().stream().map(orderItem -> {
+                CartDTO cartDTO = new CartDTO();
+                cartDTO.setProductId(orderItem.getProduct().getId());
+                cartDTO.setQuantity(orderItem.getQuantity());
+                cartDTO.setProductName(orderItem.getProduct().getProductName());
+                cartDTO.setPrice(orderItem.getProduct().getProduct_price());
+                return cartDTO;
+            }).collect(Collectors.toList())
+    );
+    return orderPayment;
+}).collect(Collectors.toList());
+
 
     }
 }
