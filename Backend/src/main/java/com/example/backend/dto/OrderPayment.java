@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 
 public class OrderPayment {
+    public Integer orderId;
     public String amount;
     public String currency;
     public LocalDate orderDate;

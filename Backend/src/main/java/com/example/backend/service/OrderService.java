@@ -63,6 +63,7 @@ List<Order> orders = orderRepository.findByUserId(user.getId());
 
 return orders.stream().map(order -> {
     OrderPayment orderPayment = new OrderPayment();
+    orderPayment.setOrderId(order.getId());
     orderPayment.setUserName(user.getUsername());
     orderPayment.setOrderDate(order.getOrderDate());
     orderPayment.setOrderStatus(order.getOrderStatus());
