@@ -1,15 +1,17 @@
 package com.example.backend.service;
 
-import com.example.backend.dto.CartDTO;
+import com.example.backend.dto.InvoiceDataDTO;
+import com.example.backend.mapper.InvoiceMapper;
+import com.example.backend.model.InvoicedataModel;
 import com.example.backend.model.Order;
 import com.example.backend.model.OrderItem;
+import com.example.backend.repository.InvoiceRepository;
 import com.example.backend.repository.OrderRepository;
 import com.itextpdf.text.pdf.PdfPCell;
 import org.springframework.stereotype.Service;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.example.backend.dto.CartDTO;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -19,10 +21,12 @@ public class InvoiceService {
 
 
     private final OrderRepository orderRepository;
+    private final InvoiceRepository invoiceRepository;
 
 
-    public InvoiceService(OrderRepository orderRepository) {
+    public InvoiceService(OrderRepository orderRepository, InvoiceRepository invoiceRepository) {
         this.orderRepository = orderRepository;
+        this.invoiceRepository = invoiceRepository;
     }
 
     public byte[] generateInvoice(Integer orderId) {
@@ -115,19 +119,19 @@ public class InvoiceService {
             totalTable.addCell("");  // Kolumna 6
 
 // Drugi wiersz - puste komórki
-            totalTable.addCell("");  // Kolumna 1
-            totalTable.addCell("");  // Kolumna 2
-            totalTable.addCell("Total VAT:");  // Kolumna 3
-            totalTable.addCell("");  // Kolumna 4
-            totalTable.addCell(String.format("%.2f", totalVat));  // Kolumna 5
-            totalTable.addCell("");  // Kolumna 6
+            totalTable.addCell("");
+            totalTable.addCell("");
+            totalTable.addCell("Total VAT:");
+            totalTable.addCell("");
+            totalTable.addCell(String.format("%.2f", totalVat));
+            totalTable.addCell("");
 
 // Trzeci wiersz - puste komórki
-            totalTable.addCell("");  // Kolumna 1
-            totalTable.addCell("");  // Kolumna 2
-            totalTable.addCell("Total Gross:");  // Kolumna 3
-            totalTable.addCell("");  // Kolumna 4
-            totalTable.addCell(String.format("%.2f", totalGross));  // Kolumna 5
+            totalTable.addCell("");
+            totalTable.addCell("");
+            totalTable.addCell("Total Gross:");
+            totalTable.addCell("");
+            totalTable.addCell(String.format("%.2f", totalGross));
             totalTable.addCell("");
             document.add(totalTable);
             document.add(Chunk.NEWLINE);
@@ -165,4 +169,41 @@ public class InvoiceService {
 
     }
 
+    public void saveToDatabase(InvoiceDataDTO invoiceDataDTO, Integer orderId) {
+        if (invoiceDataDTO == null) {
+            throw new IllegalArgumentException("InvoiceDataDTO cannot be null");
+        }
+//        Order order = orderRepository.findById(orderId)
+//                .orElseThrow(() -> new IllegalArgumentException("Order not found with ID: " + orderId));
+//        invoiceDataDTO.setOrderId(order.getId());
+
+        // Walidacja danych na podstawie typu faktury
+        validateInvoiceData(invoiceDataDTO, invoiceDataDTO.getInvoiceType());
+
+        // Mapowanie DTO na encję
+        InvoicedataModel entity = InvoiceMapper.toEntity(invoiceDataDTO);
+
+        // Zapis do bazy danych
+        invoiceRepository.save(entity);
+    }
+
+    private void validateInvoiceData(InvoiceDataDTO dto, String invoiceType) {
+        if ("invoice".equals(invoiceType)) {
+            if (dto.getNip() == null || dto.getNip().isEmpty()) {
+                throw new IllegalArgumentException("NIP is required for invoices");
+            }
+            if (dto.getCompanyName() == null || dto.getCompanyName().isEmpty()) {
+                throw new IllegalArgumentException("Company name is required for invoices");
+            }
+        } else if ("receipt".equals(invoiceType)) {
+            if (dto.getFirstName() == null || dto.getFirstName().isEmpty()) {
+                throw new IllegalArgumentException("First name is required for receipts");
+            }
+            if (dto.getLastName() == null || dto.getLastName().isEmpty()) {
+                throw new IllegalArgumentException("Last name is required for receipts");
+            }
+        } else {
+            throw new IllegalArgumentException("Invalid invoice type");
+        }
+    }
 }

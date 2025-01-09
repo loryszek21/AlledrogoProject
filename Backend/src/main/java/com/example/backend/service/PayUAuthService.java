@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.dto.OrderPayment;
+import com.example.backend.model.Order;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -65,6 +66,9 @@ public class PayUAuthService {
     }
 
     public String createOrder(OrderPayment orderPayment) {
+        if (orderPayment.getAmount() == null) {
+            return "Error: amount must not be null";
+        }
 //        RestTemplate restTemplate = new RestTemplate();
         String accessToken = authenticate();
         System.out.println("Access Token: " + accessToken);
@@ -122,8 +126,8 @@ public class PayUAuthService {
                     logger.error("Error deserializing response body", e);
                     throw new RuntimeException("Error parsing response JSON", e);
                 }
-                orderService.saveOrder(orderPayment);
-
+                Order savedOrder = orderService.saveOrder(orderPayment);
+                Integer orderId = savedOrder.getId();
                 return (String) body.get("redirectUri");
             } else if (response.getStatusCode() == HttpStatus.UNAUTHORIZED) {
                 logger.error("Unauthorized response: " + response.getBody());

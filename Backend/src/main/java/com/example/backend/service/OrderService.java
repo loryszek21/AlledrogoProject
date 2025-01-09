@@ -31,7 +31,8 @@ private final OrderItemRepository orderItemRepository;
     }
 
     @Transactional
-    public void saveOrder(OrderPayment orderPayment) {
+    public Order saveOrder(OrderPayment orderPayment) {
+        try{
         User user = userRepository.findByUsername(orderPayment.getUserName()).orElseThrow(()-> new RuntimeException("User not found"));
 
         Order order = new Order();
@@ -52,12 +53,16 @@ private final OrderItemRepository orderItemRepository;
 
         }
         cartItemRepository.deleteAllByUserId(Long.valueOf(user.getId()));
+        return orderSaved;
 
+        }catch (Exception e){
+            throw new RuntimeException("Error while saving order", e);
+        }
     }
 
     public List<OrderPayment> getOrdersPayment(String userName) {
         User user = userRepository.findByUsername(userName).orElseThrow(()-> new RuntimeException("User not found"));
-
+        
 //        OrderPayment orderPayment = new OrderPayment();
 List<Order> orders = orderRepository.findByUserId(user.getId());
 
