@@ -31,9 +31,6 @@ public class InvoiceService {
 
     public byte[] generateInvoice(Integer orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("Order not found"));
-        if (order == null) {
-            throw new IllegalArgumentException("Order not found");
-        }
 
         try(ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             Document document = new Document();
