@@ -26,5 +26,13 @@ public class OrderItem {
 
     @Column(name = "quantity")
     private Integer quantity;
+    public OrderItem(){
 
+    }
+    public OrderItem(long l, Order mockOrder, Product mockProduct, int i) {
+        id = l;
+        order = mockOrder;
+        product = mockProduct;
+        quantity = i;
+    }
 }
