@@ -34,4 +34,14 @@ public class CartItem {
     @Column(name = "date_added")
     private Instant dateAdded;
 
+    public void setProductId(long productId) {
+        if (this.product == null) {
+            this.product = new Product();
+        }
+        this.product.setId(productId);
+    }
+
+    public Long getProductId() {
+        return product.getId();
+    }
 }

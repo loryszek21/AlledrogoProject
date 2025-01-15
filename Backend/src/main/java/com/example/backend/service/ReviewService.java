@@ -37,7 +37,7 @@ public class ReviewService {
     private ReviewDTO mapToDTO(Review review) {
         ReviewDTO dto = new ReviewDTO();
         dto.setId(review.getId());
-        dto.setAuthor(review.getUser().getUsername());
+        dto.setAuthor(review.getUser() != null ? review.getUser().getUsername() : "Unknown");
         dto.setRating(review.getRating());
         dto.setDescription(review.getComment());
 
