@@ -32,33 +32,34 @@ private final OrderItemRepository orderItemRepository;
 
     @Transactional
     public Order saveOrder(OrderPayment orderPayment) {
-        try{
-        User user = userRepository.findByUsername(orderPayment.getUserName()).orElseThrow(()-> new RuntimeException("User not found"));
+        try {
+            User user = userRepository.findByUsername(orderPayment.getUserName())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
 
-        Order order = new Order();
-        order.setUser(user);
-        order.setOrderDate(LocalDate.now());
-        order.setOrderStatus("COMPLETED");
-        Order orderSaved = orderRepository.save(order);
+            Order order = new Order();
+            order.setUser(user);
+            order.setOrderDate(LocalDate.now());
+            order.setOrderStatus("COMPLETED");
+            Order orderSaved = orderRepository.save(order);
 
+            for (CartDTO cartDTO : orderPayment.getCartDTO()) {
+                OrderItem orderItem = new OrderItem();
+                orderItem.setOrder(orderSaved);
+                orderItem.setQuantity(cartDTO.getQuantity());
+                orderItem.setProduct(cartItemRepository.findProductById(cartDTO.getProductId())
+                        .orElseThrow(() -> new RuntimeException("Product not found")));
+                orderItemRepository.save(orderItem);
+            }
+            cartItemRepository.deleteAllByUserId(Long.valueOf(user.getId()));
+            return orderSaved;
 
-        for (CartDTO cartDTO : orderPayment.getCartDTO()){
-            OrderItem orderItem = new OrderItem();
-            orderItem.setOrder(orderSaved);
-            orderItem.setQuantity(cartDTO.getQuantity());
-//            System.out.println(cartItemRepository.findProductById(cartDTO.getProductId()));
-            orderItem.setProduct(cartItemRepository.findProductById(cartDTO.getProductId())
-                    .orElseThrow(() -> new RuntimeException("Product not found")));
-            orderItemRepository.save(orderItem);
-
-        }
-        cartItemRepository.deleteAllByUserId(Long.valueOf(user.getId()));
-        return orderSaved;
-
-        }catch (Exception e){
+        } catch (RuntimeException e) {
+            throw e; // Preserve original exception message
+        } catch (Exception e) {
             throw new RuntimeException("Error while saving order", e);
         }
     }
+
 
     public List<OrderPayment> getOrdersPayment(String userName) {
         User user = userRepository.findByUsername(userName).orElseThrow(()-> new RuntimeException("User not found"));

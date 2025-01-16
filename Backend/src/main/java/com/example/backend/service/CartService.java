@@ -48,12 +48,12 @@ public class CartService {
 
     }
 
-
     public CartItem addProductToCart(CartDTO cartDTO) {
         User user = userRepository.findByUsername(cartDTO.getUserName())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        Product product = productRepository.findProductById(cartDTO.getId())
+        // Use productId from CartDTO to find the product
+        Product product = productRepository.findProductById(cartDTO.getProductId())
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
         // Sprawdź, czy ten produkt jest już w koszyku użytkownika
@@ -71,8 +71,6 @@ public class CartService {
             newCartItem.setQuantity(cartDTO.getQuantity());
             newCartItem.setDateAdded(Instant.now());
             return cartRepository.save(newCartItem);
-
-
         }
     }
 

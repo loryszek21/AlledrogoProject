@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Getter

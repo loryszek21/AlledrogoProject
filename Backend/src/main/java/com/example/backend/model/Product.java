@@ -31,4 +31,9 @@ public class Product {
     private VatRate vatRate;
 
 
+    public void setProductPrice(double v) {
+    }
+
+    public void setName(String testProduct) {
+    }
 }
