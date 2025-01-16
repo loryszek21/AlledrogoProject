@@ -48,16 +48,17 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest ) {
+System.out.println(registerRequest.getUsername());
 
-    if(userRepository.findByUsername(registerRequest.getUsername()) != null) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already exists");
 
-    }
+//if(userRepository.findByUsername(registerRequest.getUsername()) ) {
+//        return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already exists");
+//    }
         User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setPassword(registerRequest.getPassword()); // Pamiętaj o szyfrowaniu hasła
-        user.setFirstName(registerRequest.getFirstName());
-        user.setLastName(registerRequest.getLastName());
+//        user.setFirstName(registerRequest.getFirstName());
+//        user.setLastName(registerRequest.getLastName());
         user.setEmail(registerRequest.getEmail());
 
         userService.registerUser(user);

@@ -3,11 +3,11 @@ package com.example.backend.controller;
 
 import com.example.backend.dto.SubscriberDTO;
 import com.example.backend.service.NewsletterService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,7 +21,7 @@ public class NewsletterController {
     }
 
     @PostMapping("/subscribe")
-    public ResponseEntity<String> subscribe(SubscriberDTO subscriberDTO) {
+    public ResponseEntity<String> subscribe(@RequestBody SubscriberDTO subscriberDTO) {
         System.out.println(subscriberDTO.getUserName());
         System.out.println(subscriberDTO.getEmail());
 

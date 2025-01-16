@@ -53,7 +53,7 @@ public class CartService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // Use productId from CartDTO to find the product
-        Product product = productRepository.findProductById(cartDTO.getProductId())
+        Product product = productRepository.findProductById(cartDTO.getId())
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
         // Sprawdź, czy ten produkt jest już w koszyku użytkownika

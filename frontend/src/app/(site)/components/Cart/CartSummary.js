@@ -47,7 +47,7 @@ function CartSummary() {
         paymentRequest
       );
       const redirectUrl = paymentResponse.data;
-      // window.location.href = redirectUrl;
+      window.location.href = redirectUrl;
 
       // Handle successful payment response
     } catch (error) {
