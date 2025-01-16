@@ -1,11 +1,3 @@
-###### AlledrogoProject\Database>
-
-###### docker compose up -d
-
-po tej komendzie baza zostanie wystartowana w tle
-
-i można zacząc korzystać z aplikacji 
-
 # Alledrogo Project
 
 ## Wymagania
@@ -22,10 +14,10 @@ W terminalu w Visual Studio Code przejdź do katalogu `frontend`. Przykład:
 
 #### a) Instalacja zależności:
 
-Uruchamiamy komendę: npm install
+Uruchamiamy komendę: `npm install`
 
 #### 2. Uruchomienie frontendu  
-Uruchamiamy komendę: npm run dev
+Uruchamiamy komendę: `npm run dev`
 
 Po tej operacji frontend wystartuje na porcie `3000`. Strona będzie dostępna pod adresem:  
 [http://localhost:3000/home](http://localhost:3000/home).  
@@ -38,7 +30,7 @@ Backend uruchamiamy w **IntelliJ IDEA** (lub innym IDE obsługującym projekty S
 Aby uruchomić bazę danych, potrzebujemy **Docker Desktop**, który można pobrać z [tej strony](https://www.docker.com/get-started/).  
 W terminalu przechodzimy do katalogu `Database`, przykładowa ścieżka:  
 `AlledrogoProject\Database>`  
-i uruchamiamy komendę: docker compose up -d
+i uruchamiamy komendę: `docker compose up -d`
 
 Po tej komendzie baza danych wystartuje w tle, a aplikacja będzie gotowa do użycia.  
 
